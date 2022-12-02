@@ -15,12 +15,29 @@ a {
   box-sizing: border-box;
 }
 
+form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 400px;
+  height: 50px;
+  background: lightcoral
+}
+
+textarea{
+  resize: none;
+  width: 250px;
+  height: 30px;
+  background: rgb(199, 191, 191);
+}
+
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
   body {
-    color: white;
-    background: black;
+    color: black;
+    background: rgba(189, 178, 178, 0.782);
   }
 }

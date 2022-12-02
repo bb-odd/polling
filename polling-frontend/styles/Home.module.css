@@ -54,3 +54,38 @@
   display: flex;
   width: 100%;
 }
+
+.createPoll{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: auto;
+  height: 350px;
+  border-radius: 10px;
+  box-shadow: 0 0 0 3px rgb(123, 74, 74);
+  border: 5px solid transparent;
+  background: lightcoral
+}
+
+.buttonDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.leftDiv{
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 40%;
+}
+
+.submitButton{
+  height: 25px;
+  width: 100px;
+  border-radius: 10px;
+
+  border: 5px solid transparent;
+}
