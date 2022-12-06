@@ -11,7 +11,7 @@ contract Polling {
         string question;
         PollState pollState;
         uint256 id;
-        uint256[] votes;
+        uint256[4] votes;
         string[] options;
     }
 
@@ -57,6 +57,7 @@ contract Polling {
         poll.options = _options;
         idToPoll[currentId] = poll;
         addressToIds[msg.sender].push(currentId);
+        ids.push(currentId);
         emit PollCreated(currentId, msg.sender);
         currentId++;
     }
