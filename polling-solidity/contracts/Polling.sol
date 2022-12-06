@@ -36,6 +36,11 @@ contract Polling {
         _;
     }
 
+    /* EVENTS */
+    event PollCreated(uint256 id, address owner);
+    event Voted(uint256 id, address voter, uint8 voteIndex);
+    event PollClosed(uint256 id, address owner);
+
     constructor() public {
         owner = msg.sender;
     }
@@ -52,6 +57,7 @@ contract Polling {
         poll.options = _options;
         idToPoll[currentId] = poll;
         addressToIds[msg.sender].push(currentId);
+        emit PollCreated(currentId, msg.sender);
         currentId++;
     }
 
@@ -75,6 +81,7 @@ contract Polling {
         );
         idToPoll[_pollId].votes[_voteIndex] += 1;
         addressToVoted[msg.sender][_pollId] = true;
+        emit Voted(_pollId, msg.sender, _voteIndex);
     }
 
     function closePoll(uint256 _pollId) external onlyPollOwner(_pollId) {
@@ -83,6 +90,7 @@ contract Polling {
             "Poll doesn't exist"
         );
         idToPoll[_pollId].pollState = PollState.CLOSED;
+        emit PollClosed(_pollId, msg.sender);
     }
 
     function getPoll(uint256 _pollId) public view returns (Poll memory) {

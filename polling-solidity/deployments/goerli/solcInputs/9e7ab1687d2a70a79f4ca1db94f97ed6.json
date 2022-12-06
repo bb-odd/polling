@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/Polling.sol": {
+      "content": "// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.9;\n\n// Uncomment this line to use console.log\n// import \"hardhat/console.sol\";\n\ncontract Polling {\n    /* TYPE DECLARATIONS */\n    struct Poll {\n        address pollOwner;\n        string question;\n        PollState pollState;\n        uint256 id;\n        uint256[] votes;\n        string[] options;\n    }\n\n    enum PollState {\n        OPEN,\n        CLOSED\n    }\n\n    /* STATE VARIABLES */\n    address public owner;\n    uint256[] public ids;\n    mapping(uint256 => Poll) idToPoll;\n    mapping(address => uint256[]) addressToIds;\n    mapping(address => mapping(uint256 => bool)) addressToVoted;\n    uint256 currentId = 0;\n\n    modifier onlyPollOwner(uint256 _pollId) {\n        require(\n            idToPoll[_pollId].pollOwner == msg.sender,\n            \"Function caller is not poll owner\"\n        );\n        _;\n    }\n\n    constructor() public {\n        owner = msg.sender;\n    }\n\n    function createPoll(\n        string memory _question,\n        string[] memory _options\n    ) external {\n        require(_options.length > 1 && _options.length <= 4);\n        Poll memory poll;\n        poll.pollOwner = msg.sender;\n        poll.id = currentId;\n        poll.question = _question;\n        poll.options = _options;\n        idToPoll[currentId] = poll;\n        addressToIds[msg.sender].push(currentId);\n        currentId++;\n    }\n\n    function vote(uint8 _voteIndex, uint256 _pollId) external {\n        require(\n            _voteIndex >= 0 &&\n                _voteIndex <= idToPoll[_pollId].options.length - 1,\n            \"Selected index is out of range\"\n        );\n        require(\n            addressToVoted[msg.sender][_pollId] == false,\n            \"Function caller has already voted on the poll\"\n        );\n        require(\n            idToPoll[_pollId].pollState == PollState.OPEN,\n            \"Poll has closed\"\n        );\n        require(\n            idToPoll[_voteIndex].pollOwner != address(0),\n            \"Poll doesn't exist\"\n        );\n        idToPoll[_pollId].votes[_voteIndex] += 1;\n        addressToVoted[msg.sender][_pollId] = true;\n    }\n\n    function closePoll(uint256 _pollId) external onlyPollOwner(_pollId) {\n        require(\n            idToPoll[_pollId].pollOwner != address(0),\n            \"Poll doesn't exist\"\n        );\n        idToPoll[_pollId].pollState = PollState.CLOSED;\n    }\n\n    function getPoll(uint256 _pollId) public view returns (Poll memory) {\n        return idToPoll[_pollId];\n    }\n\n    function getOwner() public view returns (address) {\n        return owner;\n    }\n\n    function getIds() public view returns (uint256[] memory) {\n        return ids;\n    }\n\n    function getAddressPollIds() public view returns (uint256[] memory) {\n        return addressToIds[msg.sender];\n    }\n\n    function getAddressVoted(uint256 _pollId) public view returns (bool) {\n        return addressToVoted[msg.sender][_pollId];\n    }\n\n    function getCurrentId() public view returns (uint256) {\n        return currentId;\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
