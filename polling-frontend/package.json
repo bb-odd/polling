@@ -9,12 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ethersproject/abi": "^5.7.0",
+    "@ethersproject/contracts": "^5.7.0",
+    "big-integer": "^1.6.51",
+    "bignumber": "^1.1.0",
+    "bignumber.js": "^9.1.1",
+    "bn": "^1.0.5",
+    "buffer": "^6.0.3",
     "magic-sdk": "^10.1.0",
     "moralis-v1": "^1.12.0",
     "next": "13.0.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-moralis": "^1.4.2",
+    "web3": "^1.8.1",
     "web3uikit": "^1.0.4"
   }
 }

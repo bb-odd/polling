@@ -47,12 +47,12 @@
 .tabs{
   display: flex;
   justify-content: space-evenly;
-  width: 100%;
+  width: 60%;
 }
 
 .connectButton{
   display: flex;
-  width: 100%;
+  width: 40%;
 }
 
 .createPoll{
@@ -77,7 +77,6 @@
 .leftDiv{
   margin-top: 50px;
   display: flex;
-  justify-content: center;
   height: 100%;
   width: 40%;
 }
@@ -86,6 +85,48 @@
   height: 25px;
   width: 100px;
   border-radius: 10px;
-
   border: 5px solid transparent;
+}
+
+.rightDiv{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  width: 60%;
+}
+
+.bottomDiv{
+  display: flex;
+  justify-content: space-between;
+}
+
+.poll{
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.optionDiv{
+  background-color: gray;
+  position: relative;
+  display: flex;
+}
+
+.optionDiv:hover{
+  filter: brightness(0.8);
+  cursor: pointer
+}
+
+.option{
+  display: flex;
+  justify-content: space-between;
+  z-index: 2;
+  width: 100%;
+}
+
+.optionBar{
+  background-color: rgb(91, 124, 206);
+  position: absolute;
+  height: 100%;
+  z-index:1;
 }

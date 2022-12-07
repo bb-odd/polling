@@ -20,7 +20,7 @@ const CreatePoll = ({ handleChange }) => {
     if (isWeb3Enabled) {
       updateUIValues();
     }
-  });
+  }, [isWeb3Enabled]);
 
   const {
     runContractFunction: createPoll,
@@ -84,8 +84,6 @@ const CreatePoll = ({ handleChange }) => {
       ...formData,
       ["options"]: options,
     }));
-    console.log(typeof formData.question);
-    console.log(Object.values(formData.options));
   };
 
   return (

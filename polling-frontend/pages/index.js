@@ -16,11 +16,13 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Header />
-      <div className={styles.leftDiv}>
-        <CreatePoll handleChange={handleChange} />
-      </div>
-      <div className={styles.rightDiv}>
-        <PollList ids={pollIds} />
+      <div className={styles.bottomDiv}>
+        <div className={styles.leftDiv}>
+          <CreatePoll handleChange={handleChange} />
+        </div>
+        <div className={styles.rightDiv}>
+          <PollList ids={pollIds} />
+        </div>
       </div>
     </div>
   );
